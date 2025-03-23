@@ -85,7 +85,7 @@ while(startscreen): #ROCK
                 thumby.display.drawText("Thank u fur playin", 1, 1, 1)
                 thumby.display.drawText("my Hoomin's silly", 1, 7, 1)
                 thumby.display.drawText("game! - Luna", 1, 14, 1)
-                thumby.display.drawText("B: Go Back", 1, 34, 1)
+                thumby.display.drawText("A: Go Back", 1, 34, 1)
                 
                 secretSpr = thumby.Sprite(25, 18, secretMap1+secretMap2, 47,22)
                 secretSpr.setFrame(frameCount)
@@ -93,7 +93,7 @@ while(startscreen): #ROCK
                 frameCount += 1
                 thumby.display.update()
                 
-                if thumby.buttonB.pressed():
+                if thumby.buttonA.pressed():
                     break
 
 while(running): #Main game loop
