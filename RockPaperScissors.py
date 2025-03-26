@@ -44,6 +44,29 @@ happyMap = bytearray([4,9,8,9,4])
 # BITMAP: width: 5, height: 4
 sadMap = bytearray([8,5,4,5,8])
 
+#Happy Noise
+def happyNoise():
+    thumby.audio.play(785, 200)
+    time.sleep(0.20)
+    thumby.audio.play(659, 200)
+    time.sleep(0.20)
+    thumby.audio.play(988, 200)
+
+#Sad Noise
+def sadNoise():
+    thumby.audio.play(880, 200)
+    time.sleep(0.20)
+    thumby.audio.play(698, 200)
+    time.sleep(0.20)
+    thumby.audio.play(659, 200)
+
+def drawNoise():
+    thumby.audio.play(659, 200)
+    time.sleep(0.20)
+    thumby.audio.play(659,200)
+    time.sleep(0.20)
+    thumby.audio.play(988, 200)
+
 #Intro Screen
 startscreen = True
 while(startscreen): #ROCK
@@ -70,11 +93,11 @@ while(startscreen): #ROCK
     time.sleep(0.5)
     waiting = True
     while(waiting):
-        if thumby.buttonA.pressed():
+        if thumby.buttonA.justPressed():
             startscreen = False
             running = True
             waiting = False
-        elif thumby.buttonB.pressed(): #Press B...?
+        elif thumby.buttonB.justPressed(): #Press B...?
             waiting = False
             thankyou = True
             frameCount = 0
@@ -93,7 +116,7 @@ while(startscreen): #ROCK
                 frameCount += 1
                 thumby.display.update()
                 
-                if thumby.buttonA.pressed():
+                if thumby.buttonA.justPressed():
                     break
 
 while(running): #Main game loop
@@ -122,7 +145,7 @@ while(running): #Main game loop
     print("Press Left for Rock, Up for Paper, Right for Scissors.")
     waiting = True
     while(waiting):
-        if thumby.buttonL.pressed():#Player picks Rock
+        if thumby.buttonL.justPressed():#Player picks Rock
             playerchoice = 1
             print("You choose... ROCK!")
             thumby.display.fill(0)
@@ -141,11 +164,11 @@ while(running): #Main game loop
             thumby.display.update()
             stillWaiting = True
             while(stillWaiting): #this is probably stupid but it works ok
-                if thumby.buttonA.pressed():
+                if thumby.buttonA.justPressed():
                     waiting = False
                     stillWaiting = False
             
-        elif thumby.buttonU.pressed():#Player picks Paper
+        elif thumby.buttonU.justPressed():#Player picks Paper
             playerchoice = 2
             print("You choose... PAPER!")
             thumby.display.fill(0)
@@ -164,11 +187,11 @@ while(running): #Main game loop
             thumby.display.update()
             stillWaiting = True
             while(stillWaiting): #this is probably stupid but it works ok
-                if thumby.buttonA.pressed():
+                if thumby.buttonA.justPressed():
                     waiting = False
                     stillWaiting = False
             
-        elif thumby.buttonR.pressed():#Player picks Scissors
+        elif thumby.buttonR.justPressed():#Player picks Scissors
             playerchoice = 3
             print("You choose... SCISSORS!")
             thumby.display.fill(0)
@@ -187,11 +210,11 @@ while(running): #Main game loop
             thumby.display.update()
             stillWaiting = True
             while(stillWaiting): #this is probably stupid but it works ok
-                if thumby.buttonA.pressed():
+                if thumby.buttonA.justPressed():
                     waiting = False
                     stillWaiting = False
                     
-        elif thumby.buttonD.pressed(): #Wait there's a fourth option?
+        elif thumby.buttonD.justPressed(): #Wait there's a fourth option?
             playerchoice = 4
             print("You chose... LUNA!")
             thumby.display.fill(0)
@@ -213,7 +236,7 @@ while(running): #Main game loop
                 thumby.display.drawSprite(secretSpr)
                 frameCount += 1
                 thumby.display.update()
-                if thumby.buttonA.pressed():
+                if thumby.buttonA.justPressed():
                     waiting = False
                     stillWaiting = False
             
@@ -243,7 +266,7 @@ while(running): #Main game loop
             thumby.display.update()
             stillWaiting = True
             while(stillWaiting): #this is probably stupid but it works ok
-                if thumby.buttonA.pressed():
+                if thumby.buttonA.justPressed():
                     waiting = False
                     stillWaiting = False
         
@@ -268,7 +291,7 @@ while(running): #Main game loop
             thumby.display.update()
             stillWaiting = True
             while(stillWaiting): #this is probably stupid but it works ok
-                if thumby.buttonA.pressed():
+                if thumby.buttonA.justPressed():
                     waiting = False
                     stillWaiting = False
         
@@ -292,7 +315,7 @@ while(running): #Main game loop
             thumby.display.update()
             stillWaiting = True
             while(stillWaiting): #this is probably stupid but it works ok
-                if thumby.buttonA.pressed():
+                if thumby.buttonA.justPressed():
                     waiting = False
                     stillWaiting = False
 
@@ -315,7 +338,7 @@ while(running): #Main game loop
                     thumby.display.update()
                     stillWaiting = True
                     while(stillWaiting): #this is probably stupid but it works ok
-                        if thumby.buttonA.pressed():
+                        if thumby.buttonA.justPressed():
                             waiting = False
                             stillWaiting = False
                         
@@ -324,6 +347,7 @@ while(running): #Main game loop
             waiting = True
             thumby.display.fill(0)
             while(waiting):
+                sadNoise()
                 thumby.display.setFont("/lib/font5x7.bin", 5, 7, 1)
                 thumby.display.drawText("You Lose", 13, 5, 1)
                 sadSpr = thumby.Sprite(5, 4, sadMap, 32, 15)
@@ -335,7 +359,7 @@ while(running): #Main game loop
                 thumby.display.update()
                 stillWaiting = True
                 while(stillWaiting): #this is probably stupid but it works ok
-                    if thumby.buttonA.pressed():
+                    if thumby.buttonA.justPressed():
                         waiting = False
                         stillWaiting = False
                         
@@ -344,6 +368,7 @@ while(running): #Main game loop
             waiting = True
             thumby.display.fill(0)
             while(waiting):
+                happyNoise()
                 thumby.display.setFont("/lib/font5x7.bin", 5, 7, 1)
                 thumby.display.drawText("You Win!", 13, 5, 1)
                 happySpr = thumby.Sprite(5, 4, happyMap, 32, 15)
@@ -355,7 +380,7 @@ while(running): #Main game loop
                 thumby.display.update()
                 stillWaiting = True
                 while(stillWaiting): #this is probably stupid but it works ok
-                    if thumby.buttonA.pressed():
+                    if thumby.buttonA.justPressed():
                         waiting = False
                         stillWaiting = False
             
@@ -365,6 +390,7 @@ while(running): #Main game loop
             waiting = True
             thumby.display.fill(0)
             while(waiting):
+                happyNoise()
                 thumby.display.setFont("/lib/font5x7.bin", 5, 7, 1)
                 thumby.display.drawText("You Win!", 13, 5, 1)
                 happySpr = thumby.Sprite(5, 4, happyMap, 32, 15)
@@ -376,7 +402,7 @@ while(running): #Main game loop
                 thumby.display.update()
                 stillWaiting = True
                 while(stillWaiting): #this is probably stupid but it works ok
-                    if thumby.buttonA.pressed():
+                    if thumby.buttonA.justPressed():
                         waiting = False
                         stillWaiting = False
                         
@@ -394,7 +420,7 @@ while(running): #Main game loop
                 thumby.display.update()
                 stillWaiting = True
                 while(stillWaiting): #this is probably stupid but it works ok
-                    if thumby.buttonA.pressed():
+                    if thumby.buttonA.justPressed():
                         waiting = False
                         stillWaiting = False
                         
@@ -403,6 +429,7 @@ while(running): #Main game loop
             waiting = True
             thumby.display.fill(0)
             while(waiting):
+                sadNoise()
                 thumby.display.setFont("/lib/font5x7.bin", 5, 7, 1)
                 thumby.display.drawText("You Lose", 13, 5, 1)
                 sadSpr = thumby.Sprite(5, 4, sadMap, 32, 15)
@@ -414,7 +441,7 @@ while(running): #Main game loop
                 thumby.display.update()
                 stillWaiting = True
                 while(stillWaiting): #this is probably stupid but it works ok
-                    if thumby.buttonA.pressed():
+                    if thumby.buttonA.justPressed():
                         waiting = False
                         stillWaiting = False
                         
@@ -424,6 +451,7 @@ while(running): #Main game loop
             waiting = True
             thumby.display.fill(0)
             while(waiting):
+                sadNoise()
                 thumby.display.setFont("/lib/font5x7.bin", 5, 7, 1)
                 thumby.display.drawText("You Lose", 13, 5, 1)
                 sadSpr = thumby.Sprite(5, 4, sadMap, 32, 15)
@@ -435,7 +463,7 @@ while(running): #Main game loop
                 thumby.display.update()
                 stillWaiting = True
                 while(stillWaiting): #this is probably stupid but it works ok
-                    if thumby.buttonA.pressed():
+                    if thumby.buttonA.justPressed():
                         waiting = False
                         stillWaiting = False
                         
@@ -444,6 +472,7 @@ while(running): #Main game loop
             waiting = True
             thumby.display.fill(0)
             while(waiting):
+                happyNoise()
                 thumby.display.setFont("/lib/font5x7.bin", 5, 7, 1)
                 thumby.display.drawText("You Win!", 13, 5, 1)
                 happySpr = thumby.Sprite(5, 4, happyMap, 32, 15)
@@ -455,7 +484,7 @@ while(running): #Main game loop
                 thumby.display.update()
                 stillWaiting = True
                 while(stillWaiting): #this is probably stupid but it works ok
-                    if thumby.buttonA.pressed():
+                    if thumby.buttonA.justPressed():
                         waiting = False
                         stillWaiting = False
                         
@@ -473,7 +502,7 @@ while(running): #Main game loop
                 thumby.display.update()
                 stillWaiting = True
                 while(stillWaiting): #this is probably stupid but it works ok
-                    if thumby.buttonA.pressed():
+                    if thumby.buttonA.justPressed():
                         waiting = False
                         stillWaiting = False
                         
@@ -483,7 +512,7 @@ while(running): #Main game loop
         thumby.display.setFont("/lib/font3x5.bin", 3, 5,1)
         thumby.display.drawText("Luna always wins.", 1, 1, 1)
         thumby.display.drawText("It's the Rules.", 1, 7, 1)
-        time.sleep(2)
+        happyNoise()
         thumby.display.drawText("A: Next", 1, 34, 1)
         frameCount = 0
         thumby.display.setFPS(5)
@@ -494,7 +523,7 @@ while(running): #Main game loop
             thumby.display.drawSprite(secretSpr)
             frameCount += 1
             thumby.display.update()
-            if thumby.buttonA.pressed():
+            if thumby.buttonA.justPressed():
                 waiting = False
                 stillWaiting = False
                 
@@ -508,8 +537,8 @@ while(running): #Main game loop
         thumby.display.drawText("A:Y B:N", 1, 10, 1)
         thumby.display.update()
         time.sleep(0.5)
-        if thumby.buttonA.pressed():
+        if thumby.buttonA.justPressed():
             waiting = False
-        elif thumby.buttonB.pressed():
+        elif thumby.buttonB.justPressed():
             thumby.reset()
     
